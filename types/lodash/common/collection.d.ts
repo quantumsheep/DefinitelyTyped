@@ -1044,15 +1044,15 @@ declare module "../index" {
     }
     interface LoDashStatic {
         /**
-        * Invokes the method named by methodName on each element in the collection returning
-        * an array of the results of each invoked method. Additional arguments will be provided
-        * to each invoked method. If methodName is a function it will be invoked for, and this
-        * bound to, each element in the collection.
-        * @param collection The collection to iterate over.
-        * @param methodName The name of the method to invoke.
-        * @param args Arguments to invoke the method with.
+         * Invokes the method named by methodName on each element in the collection returning
+         * an array of the results of each invoked method. Additional arguments will be provided
+         * to each invoked method. If methodName is a function it will be invoked for, and this
+         * bound to, each element in the collection.
+         * @param collection The collection to iterate over.
+         * @param methodName The name of the method to invoke.
+         * @param args Arguments to invoke the method with.
          */
-        invokeMap(collection: object | null | undefined, methodName: string, ...args: any[]): any[];
+        invokeMap<TValue, K extends keyof TValue, TResult extends TValue[K] extends (...args: any) => any ? ReturnType<TValue[K]> : any>(collection: TValue[] | Record<string, TValue> | object | null | undefined, methodName: K | string, ...args: any[]): TResult[];
         /**
          * @see _.invokeMap
          */
@@ -1062,7 +1062,7 @@ declare module "../index" {
         /**
          * @see _.invokeMap
          */
-        invokeMap(methodName: string, ...args: any[]): Collection<any>;
+        invokeMap<K extends keyof TValue, TResult extends TValue[K] extends (...args: any) => any ? ReturnType<TValue[K]> : any>(collection: TValue[] | Record<string, TValue> | object | null | undefined, methodName: K | string, ...args: any[]): Collection<TResult>;
         /**
          * @see _.invokeMap
          */
@@ -1072,7 +1072,7 @@ declare module "../index" {
         /**
          * @see _.invokeMap
          */
-        invokeMap(methodName: string, ...args: any[]): CollectionChain<any>;
+        invokeMap<K extends keyof TValue, TResult extends TValue[K] extends (...args: any) => any ? ReturnType<TValue[K]> : any>(collection: TValue[] | Record<string, TValue> | object | null | undefined, methodName: K | string, ...args: any[]): Collection<TResult>;
         /**
          * @see _.invokeMap
          */
